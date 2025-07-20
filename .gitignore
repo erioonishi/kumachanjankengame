@@ -1,0 +1,28 @@
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# node_modulesやビルド生成物があれば除外
+node_modules/
+dist/
+build/
+
+# エディタ固有ファイル
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# 一時ファイルやログ
+*.log
+*.tmp
+*.temp
+
+# キャッシュ系
+.cache/
+
+# 画像やjs, css, htmlは普通は管理するので除外しない
+
+# IDEの設定フォルダ
+.idea/
+*.iml

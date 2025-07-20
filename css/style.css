@@ -1,0 +1,317 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #fffbe4;
+}
+
+/*＝＝＝ ローディング画面＝＝＝ */
+@keyframes loading{/* ふわっと始まる */
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+#loading {/* 薄黄色の画面全体 */
+  background-color:  #fffdef;
+  position: fixed;/*固定 */
+  inset: 0;/*要素の中満タンに */
+  /* position: fixed;とinset: 0;で指定する画面背景を覆う */
+  display: grid;
+  z-index: 9999;/* 最前面 */
+  place-items: center;
+  /* くまちゃん真ん中 */
+}
+#loadingkuma {
+  animation: loading 2s;/* くまちゃんゆっくり出る */
+  width: 50%;/* くまちゃんのサイズ */
+}
+/* ローディング完了したらローディング画面を隠す */
+.loaded {
+  animation: fadeOut 2s ease-out forwards;
+  /* fadeOut：適用するアニメーション名（@keyframes fadeOut で定義）
+　2s：アニメーションの時間（2秒間）
+　ease-out：最初は速く、最後はゆっくり
+　forwards：アニメーション終了後、最後の状態を維持 */
+  pointer-events: none; /* クリックを無効に */
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/*＝＝＝ 始まりのポップアップ画面＝＝＝ */
+.popup-background {
+	/* 画面全体を暗くする透過背景 */
+	position: fixed;/* inset: 0と使って画面全体に背景を覆う */
+  inset: 0;
+	background: rgba(0,0,0,.5);
+	z-index: 9998;
+}
+.popup-content {
+	/* ポップアップ本体 */
+	display: inline-block;
+	position: fixed;
+	width: 50%;
+	z-index: 9999;
+	background: #fff;
+	padding: 5%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);/* 中央寄せ */
+  border-radius: 8px;
+}
+label {
+  /* チェックボックス */
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#check{
+  /* チェックボックスボタン色 */
+  accent-color:  rgb(165, 93, 0);
+}
+#btn,#nextBtn,#nextBtn2,#nextBtn3,#finishBtn{
+  /* ボタン */
+  display: block;
+  margin: auto;
+  background: rgb(224, 169, 16);
+  color:  rgb(255, 255, 255);
+  padding: .75rem 1rem;
+  border-radius: 8px;
+}
+#checkAnswer,#checkAnswer2{
+  /* ボタン */
+  display: block;
+  margin: auto;
+  background: rgb(224, 169, 16);
+  color:  rgb(255, 255, 255);
+  padding: .5rem 1rem;
+  margin-bottom: .5rem;
+  border-radius: 8px;
+}
+#btn:disabled {/* 疑似クラス */
+  /* チェックの入ってない時のボタン */
+  background: #ccc;
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/*＝＝＝ 終わりのポップアップ画面(モーダルウインドウ)＝＝＝ */
+#open,#close {
+    background: rgb(224, 169, 16);/* ボタン背景 */
+    color:  rgb(255, 255, 255);
+    border-radius: .5rem;/* 角丸 */
+    padding: .75rem 1rem;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;/* 真ん中へ */
+}
+#open{
+  position: relative;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.16);
+  margin-bottom: 10%;/* 一番下の空白 */
+}
+#mask {/* 画面全体を暗くする透過背景 */
+    background: rgba(0, 0, 0, .6);
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    visibility: hidden;/* 要素が不可視 */
+}
+#modal {
+    background: #fffbe4;
+    max-width:50%;
+    padding: 2rem;
+    border-radius: .5rem;
+    position: absolute;
+    inset: 10rem 0 auto;
+    /* 要素を 上から 10rem の位置に固定 しつつ、左右の位置を 0 にして中央揃え */
+    margin: auto;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+}
+#modal p img{/* 画像サイズ */
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/* ▼▼▼▼▼▼本文▼▼▼▼▼ */
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  background-color:#fffbe4;
+}
+
+/*＝＝＝くまの森のイラスト＝＝＝ */
+.container{/* クマハウスを入れておく箱 */
+  height: 460px;
+
+}
+.kumahouse{/* 3枚の画像まとめ */
+
+  position: relative;/*基準値決め */
+}
+ .kumasan, .kumasan2 {/*画像3枚重ねる  */
+  position: absolute; 
+  /* 子要素を絶対配置にする */
+}
+.kumasan{
+  width: 100%; 
+}
+.kumasan2 {/*くまとおうち真ん中へ */
+  width: 33%;
+  left: 50%;
+  transform: translateX(-50%);
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/*＝＝＝くまのおうちの屋根に色をつけて＝＝＝ */
+section img {
+    max-width: 100%;   
+}
+.kumabox {
+  text-align: center;
+  width: 50%;
+  background-color:  #fffdf0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.16);
+  padding: 10px 0;
+  margin: 5% auto; /* 上下の余白を10%、左右をautoにして中央配置 */
+}
+.kumabox p{
+  margin: 10px 0;
+}
+ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding: .75rem 3rem;
+}
+li {
+  flex: 1 1 auto;
+  margin: 6px;
+}
+.thumb {
+  cursor: pointer;
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/*＝＝＝くまの森クイズ＝＝＝ */
+.quiz-options {/*クイズ横並び */
+  display: flex;
+  gap: 20px; /* 各選択肢の間隔を設定 */
+  justify-content: center; /* 中央揃え */
+}
+.quiz-options label {/*ラジオボタンの選択肢の位置調整 */
+  display: flex;
+  align-items: center; /* ラジオボタンとテキストを中央揃え */
+  gap: 5px; /* ボタンとテキストの間隔 */
+}/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/*＝＝＝くまじゃんけん＝＝＝ */
+/* じゃんけんボタンを横並びに */
+.janken-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.jankenBtn {
+  font-size: 17px;
+  padding: 8px;
+  cursor: pointer;
+
+   background: rgb(241, 205, 103);
+   color:  rgb(63, 41, 15);
+   box-shadow: 0px 0px 8px rgba(0,0,0,0.16);
+   border-radius: 8px;
+ }
+ .pc {
+  display: block !important;
+}
+
+
+.sp {
+  display: none !important;
+}
+/* ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ */
+
+/* =======================================================
+レスポンシブ
+========================================================= */
+@media screen and (max-width: 1800px){
+.container{/* クマハウスを入れておく箱 */
+  height:420px;
+}
+}
+@media screen and (max-width: 1500px){
+.container{/* クマハウスを入れておく箱 */
+  height:340px;
+}}
+@media screen and (max-width: 960px){
+/* ここにタブレット用スタイルを記述 */
+#loadingkuma {
+  width: 70%;/* くまちゃんのサイズ */
+}
+.container{/* クマハウスを入れておく箱 */
+  height: 260px;
+  margin-top: 5%;
+}
+.kumabox {
+  top: 80%;  
+  width: 70%;
+  margin: 0 auto 8%;
+}}
+@media screen and (max-width: 640px) {
+/* ここにモバイル用スタイルを記述 */
+/*pcとsp画像切り替え*/
+.pc {
+  display: none !important;
+} 
+.sp {
+  display: block !important;
+}
+.wrapper {
+  width: 90%;
+}
+p{
+  font-size: .75rem;
+}
+#btn,#nextBtn,#nextBtn2,#nextBtn3,#finishBtn,#checkAnswer,#checkAnswer2,#quizForm,#open,#check,#close{
+  font-size: .75rem;
+}
+label{
+  font-size: .75rem;
+}
+#loadingkuma {
+  width: 70%;/* くまちゃんのサイズ */
+  } 
+ul {
+  padding: .75rem 1.5rem;
+}
+.container{/* クマハウスを入れておく箱 */
+  height: 320px;
+  margin: 0 0 5%;
+}
+.kumasan2 {
+  width: 60%;
+}
+.kumabox {  
+  width: 90%;
+  margin: 10% auto 4%; /* 上下の余白を10%、左右をautoにして中央配置 */
+  }
+#open,#close {  
+  margin:20% auto;/* 真ん中へ */
+}
+#modal p img {
+  width: 100%;
+}}
+@media screen and (max-width: 500px) {
+.container{/* クマハウスを入れておく箱 */
+  height: 250px;
+  margin: 0 ;
+}}
+@media screen and (max-width: 380px) {
+.container{/* クマハウスを入れておく箱 */
+  height: 190px;
+  margin: 0 ;
+}}

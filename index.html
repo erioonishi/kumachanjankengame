@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="favicon.ico">
+	<link rel="icon" type="image/png" href="android-touch-icon.png" sizes="192x192">
+	<script src="js/loading.js" defer></script>
+	<script src="js/popupbtn.js" defer></script>
+	<script src="js/modal.js" defer></script>
+	<script src="js/game.js" defer></script>
+	
+	<title>じゃばすくまちゃん</title>
+</head>
+
+<body>
+
+<!-- ローディング画面 -->
+<div id="loading">
+	<img id="loadingkuma" src="images/loading.gif" alt="">
+</div>
+
+<!-- チェックボタン -->
+<div class="popup-box">
+<div class="popup-background">
+<div class="popup-content">
+	<label><input id="check" type="checkbox">くまちゃんと遊んでくれますか？</label>
+	<input id="btn" type="submit" value="会いに行く" disabled>
+</div>
+</div>
+</div>
+
+<div class="wrapper"><!-- ここから本体 -->
+
+<!-- くまちゃん家 -->
+<div class="pc">
+	<div class="container">
+	<div class="kumahouse">
+		<img class="kumasan"src="images/mori.png" alt="くまの森のイラスト">
+		<img class="kumasan2"src="images/color/0.png" alt="入れ替える透明画像" id="bigimg"><!-- 色変えるためのid -->
+		<img class="kumasan2"src="images/house.png" alt="くまの家のイラスト">
+		<img class="kumasan2"src="images/kuma1.png" alt="くまのイラスト" id="mainImage"><!-- イラスト変えるためのid -->
+	</div>
+	</div>
+</div>
+<div class="sp">
+	<div class="container">
+	<div class="kumahouse">
+		<img class="kumasan2"src="images/color/0.png" alt="入れ替える透明画像" id="bigimg"><!-- 色変えるためのid -->
+		<img class="kumasan2"src="images/house.png" alt="くまの家のイラスト">
+		<img class="kumasan2"src="images/kuma1.png" alt="くまのイラスト" id="mainImage"><!-- イラスト変えるためのid -->
+	</div>
+	</div>
+</div>
+
+<!-- くまからお願い -->
+<section id="sectionBox1">
+    <div class="kumabox">
+		<p>くまのお家の屋根の色を選んでほしいな</p>
+        <ul>
+            <li><img src="images/color/1maru.png" class="thumb" data-image="images/color/1.png"></li>
+            <li><img src="images/color/2maru.png" class="thumb" data-image="images/color/2.png"></li>
+            <li><img src="images/color/3maru.png" class="thumb" data-image="images/color/3.png"></li>
+            <li><img src="images/color/4maru.png" class="thumb" data-image="images/color/4.png"></li>
+			<li><img src="images/color/5maru.png" class="thumb" data-image="images/color/5.png"></li>
+        </ul>
+		<button type="button" id="nextBtn">次へ</button>				
+    </div>
+</section>
+
+
+<!-- くまクイズ -->
+<section id="sectionBox2"style="display:none;">
+    <div class="kumabox">
+		<p>くまちゃんの好きな食べ物は？</p> <!-- 1回だけ表示 -->
+        <form id="quizForm">
+			<div class="quiz-options">
+            <label><input type="radio" name="quiz" value="wrong1"> りんご</label><br>
+            <label><input type="radio" name="quiz" value="correct"> はちみつ</label><br>
+            <label><input type="radio" name="quiz" value="wrong2"> お魚</label><br>
+        </div>
+		   <button type="button" id="checkAnswer">答え合わせ</button>
+		   <p id="quizResult1"></p> <!-- ここに結果が表示される -->
+        </form>
+		<button type="button" id="nextBtn2">次へ</button>	
+    </div>
+</section>
+<section id="sectionBox3"style="display:none;">
+    <div class="kumabox">
+		<p>くまちゃんの好きな色は？</p> <!-- 1回だけ表示 -->
+        <form id="quizForm">
+			<div class="quiz-options">
+            <label><input type="radio" name="quiz2" value="wrong1"> 赤</label><br>
+            <label><input type="radio" name="quiz2" value="correct"> 黄</label><br>
+            <label><input type="radio" name="quiz2" value="wrong2"> 青</label><br>
+        </div>
+		   <button type="button" id="checkAnswer2">答え合わせ</button>
+		   <p id="quizResult2"></p> <!-- ここに結果が表示される -->
+        </form>
+		<button type="button" id="nextBtn3">次へ</button>	
+    </div>
+</section>
+
+<!-- じゃんけんゲーム -->
+<section id="sectionBox4" style="display:none;">
+    <div class="kumabox">
+        <p>くまちゃんとじゃんけんしよう！</p>
+        <div class="janken-options">
+            <button class="jankenBtn" data-choice="グー">グー</button>
+            <button class="jankenBtn" data-choice="チョキ">チョキ</button>
+            <button class="jankenBtn" data-choice="パー">パー</button>
+        </div>
+        <p id="jankenResult"></p>
+        <button type="button" id="finishBtn">終了</button>
+    </div>
+</section>
+
+<!-- 終了ボタン -->
+<button id="open">また今度会う</button>
+<section id="modal">
+<p><img src="images/portfolio.gif" alt="バイバイの画像"></p>
+<button id="close">またね</button>
+</section>
+<div id="mask"></div>
+
+</div><!-- wrapperここまで -->
+
+</body>
+</html>
